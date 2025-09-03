@@ -18,7 +18,7 @@ def info():
 
 @app.route('/credit/')
 
-def info():
+def credit():
     return CREDIT
 
 if __name__ == '__main__':
