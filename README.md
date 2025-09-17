@@ -25,3 +25,13 @@ TP3 :
 * Liaison entre le html et le css en utilisant des paramètres
 
 * Utilisation de paramètres python dans le script html
+
+TP4 : 
+
+* Séparation du fichier index.html en 2 afin d'avoir une base utilisable pour tous
+
+* Réecriture des pages index, about et contact en utilisant le nouveau model
+
+* Ajout d'url dynamique
+
+* Utilisation des données de la base de données afin de faire la page sur les auteurs et livres
