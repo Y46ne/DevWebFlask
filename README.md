@@ -15,3 +15,13 @@ TP2 :
 * Ajout des données du fichier data.yml 
 
 * Test des commandes shells dans le shell pour interagir avec la base de données
+
+TP3 : 
+
+* Mise en place de fichier template html pour Index, about et contact
+
+* Ajout de fichier css, afin de customiser la page
+
+* Liaison entre le html et le css en utilisant des paramètres
+
+* Utilisation de paramètres python dans le script html
