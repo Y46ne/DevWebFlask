@@ -44,7 +44,7 @@ def getAuteurs():
 @app.route('/livres/')
 def getLivres():
     lesLivres = Livre.query.all()
-    return render_template('livre_list.html', title = "R3.01 Dev Web avec Flask", auteurs = lesLivres)
+    return render_template('livre_list.html', title = "R3.01 Dev Web avec Flask", livres = lesLivres)
 
 
 

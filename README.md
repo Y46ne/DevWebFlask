@@ -35,3 +35,5 @@ TP4 :
 * Ajout d'url dynamique
 
 * Utilisation des données de la base de données afin de faire la page sur les auteurs et livres
+
+* Découverte et utilisation de Booststrap
