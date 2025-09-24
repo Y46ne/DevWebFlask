@@ -1,2 +1,4 @@
 *.pyc
 *.pdf
+monApp/__pycache__/app.cpython-312.pyc
+monApp/__pycache__/views.cpython-312.pyc

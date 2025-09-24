@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block main %}
+<h1 >Modification de l'auteur {{ selectedAuteur.Nom }}</h1>
+<form method ="POST" action ="">
+    {{ updateForm.hidden_tag () }}
+    {{ updateForm.Nom.label }} {{ updateForm.Nom(size =50) }}
+    <input type="submit" value ="Enregistrer">
+</form >
+{% endblock %}

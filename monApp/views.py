@@ -1,7 +1,10 @@
-from .app import app
+from .app import app, db
 from config import *
 from flask import render_template, request
 from monApp.models import Auteur, Livre
+from monApp.forms import FormAuteur
+from flask import url_for, redirect
+
 
 @app.route('/')
 
@@ -46,7 +49,33 @@ def getLivres():
     lesLivres = Livre.query.all()
     return render_template('livre_list.html', title = "R3.01 Dev Web avec Flask", livres = lesLivres)
 
+@app.route('/auteurs/<idA>/update')
+def updateAuteur(idA):
+    unAuteur = Auteur.query.get(idA)
+    unForm = FormAuteur(idA=unAuteur.idA, Nom = unAuteur.Nom)
+    return render_template("auteur_update.html",selectedAuteur=unAuteur,updateForm=unForm)
 
+
+@app.route('/auteur/save/', methods = ("POST",))
+def saveAuteur():
+    updatedAuteur = None
+    unForm = FormAuteur()
+    #recherche de l'auteur à modifier
+    idA = int(unForm.idA.data)
+    updateAuteur = Auteur.query.get(idA)
+    #si les données saisies sont valides pour la mise à jour
+    if unForm.validate_on_submit():
+        updatedAuteur.Nom = unForm.Nom.data
+        db.sessions.commit()
+        return redirect(url_for('viewAuteur',idA=updatedAuteur.idA))
+
+    return render_template("auteur_update.html", selectedAuteur=updatedAuteur, viewForm=unForm)
+
+@app.route('/auteurs/<idA</view/')
+def viewAuteur(idA):
+    unAuteur = Auteur.query.get(idA)
+    unForm = FormAuteur(idA=unAuteur.idA,Nom=unAuteur.Nom)
+    return render_template("auteur_view.html",selectedAuteur=unAuteur, viewForm=unForm)
 
 if __name__ == '__main__':
     app.run()
