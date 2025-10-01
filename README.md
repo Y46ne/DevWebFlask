@@ -40,4 +40,5 @@ TP4 :
 
 TP5 :
 
-* début du tp5
+* ajout des différentes pages view, update, delete etc
+* Ajout des boutons dans le header pour pouvoir naviguer
