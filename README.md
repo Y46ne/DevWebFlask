@@ -42,3 +42,4 @@ TP5 :
 
 * ajout des différentes pages view, update, delete etc
 * Ajout des boutons dans le header pour pouvoir naviguer
+* Ajout de la même fonctionalité pour les livres (Consulter et Modifier le prix)

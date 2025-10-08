@@ -10,17 +10,17 @@
         class="form-group mb-3"
     {% endif %}
     >
-    {{ updateForm.idL.label }}
-    {{ updateForm.idL(size =50, class_="form-control") }}
+    {{ updateForm.Prix.label }}
+    {{ updateForm.Prix(size =50, class_="form-control") }}
     </div>
-    {% if updateForm.idL.errors %}
+    {% if updateForm.Prix.errors %}
         <ul class ="list-group">
-        {% for e in updateForm.idL.errors %}
+        {% for e in updateForm.Prix.errors %}
             <li class ="list-group-item list-group-item-danger" >{{ e }} </li >
         {% endfor %}
         </ul >
     {% endif %}
     <input class ="btn btn-success" type="submit" value ="Enregistrer">
-    <a href="{{ url_for('getLivres') }}" class="btn btn-secondary">Retour</a>
+    <a href="{{ url_for ('getLivres') }}" class="btn btn-secondary">Retour</a>
 </form >
 {% endblock %}

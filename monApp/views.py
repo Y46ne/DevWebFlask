@@ -2,7 +2,7 @@ from .app import app, db
 from config import *
 from flask import render_template, request
 from monApp.models import Auteur, Livre
-from monApp.forms import FormAuteur, FormLivre
+from monApp.forms import *
 from flask import url_for, redirect
 
 
@@ -52,7 +52,7 @@ def getLivres():
 @app.route('/livres/<idL>/update')
 def updateLivre(idL):
     unLivre = Livre.query.get(idL)
-    unForm = FormLivre(idA = unLivre.idL, Prix = unLivre.Prix)
+    unForm = FormLivre(idL = unLivre.idL, Prix = unLivre.Prix)
     return render_template("livre_update.html",selectedLivre=unLivre,updateForm=unForm)
 
 @app.route('/livre/save/', methods = ("POST",))
@@ -60,11 +60,15 @@ def saveLivre():
     updatedLivre = None
     unForm = FormLivre()
     #recherche du livre à modifier
-    idL = int(unForm.idL.data)
+    print(unForm.idL.data)
+    print(unForm.Prix.data)
+    #idL = int(unForm.idL.data)
+    print("hello")
+    idL = 1
     updatedLivre = Livre.query.get(idL)
     #si les données saisies sont valides pour la mise à jour
     if unForm.validate_on_submit():
-        updatedLivre.Nom = unForm.Nom.data
+        updatedLivre.Prix = unForm.Prix.data
         db.session.commit()
         return redirect(url_for('viewLivre',idL=updatedLivre.idL))
 
@@ -73,7 +77,7 @@ def saveLivre():
 @app.route('/livres/<idL>/view/')
 def viewLivre(idL):
     unLivre = Livre.query.get(idL)
-    unForm = FormLivre(idA=unLivre.idL,Nom=unLivre.Prix)
+    unForm = FormLivre(idL=unLivre.idL,Prix=unLivre.Prix)
     return render_template("livre_view.html",selectedLivre=unLivre, viewForm=unForm)
 
 

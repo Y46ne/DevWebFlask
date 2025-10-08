@@ -4,8 +4,8 @@
 <form role="form" method="POST" action="">
     {{ viewForm.hidden_tag () }}
     <div class="form-group mb-3">
-        {{ viewForm.idL.label }} 
-        {{ viewForm.idL(size=50, disabled=True, class_="form-control") }}
+        {{ viewForm.Prix.label }} 
+        {{ viewForm.Prix(size=50, disabled=True, class_="form-control") }}
     </div>
     <a href="{{ url_for('getLivres') }}" class="btn btn-secondary">Retour</a>
 </form >
