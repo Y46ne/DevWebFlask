@@ -41,5 +41,15 @@ TP4 :
 TP5 :
 
 * ajout des différentes pages view, update, delete etc
+
 * Ajout des boutons dans le header pour pouvoir naviguer
+
 * Ajout de la même fonctionalité pour les livres (Consulter et Modifier le prix)
+
+TP6:
+
+* ajout de la fonctionnalité de login
+
+* ajout de la page pour se login
+
+* ajout des restrictions faisant que le login est obligatoire pour accèder à certaine page

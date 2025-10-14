@@ -4,6 +4,7 @@ from flask import render_template, request
 from monApp.models import Auteur, Livre
 from monApp.forms import *
 from flask import url_for, redirect
+from flask_login import *
 
 
 @app.route('/')
@@ -83,6 +84,7 @@ def viewLivre(idL):
 
 
 @app.route('/auteurs/<idA>/update')
+@login_required
 def updateAuteur(idA):
     unAuteur = Auteur.query.get(idA)
     unForm = FormAuteur(idA=unAuteur.idA, Nom = unAuteur.Nom)
@@ -147,7 +149,24 @@ def eraseAuteur():
     db.session.commit()
     return redirect(url_for('getAuteurs'))
 
+@app.route ("/login/", methods =("GET","POST" ,))
+def login():
+    unForm = LoginForm ()
+    unUser=None
+    if not unForm.is_submitted():
+        unForm.next.data = request.args.get('next')
+    elif unForm.validate_on_submit():
+        unUser = unForm.get_authenticated_user()
+        if unUser:
+            login_user(unUser)
+            next = unForm.next.data or url_for("index",name=unUser.Login)
+            return redirect (next)
+    return render_template ("login.html",form=unForm)
 
+@app.route ("/logout/")
+def logout():
+    logout_user()
+    return redirect ( url_for ('index'))
 
 if __name__ == '__main__':
     app.run()

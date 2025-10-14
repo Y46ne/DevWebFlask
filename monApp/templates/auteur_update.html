@@ -10,6 +10,7 @@
         class="form-group mb-3"
     {% endif %}
     >
+    {% if current_user.is_authenticated %}
     {{ updateForm.Nom.label }}
     {{ updateForm.Nom(size =50, class_="form-control") }}
     </div>
@@ -21,6 +22,7 @@
         </ul >
     {% endif %}
     <input class ="btn btn-success" type="submit" value ="Enregistrer">
+    {% endif %}
     <a href="{{ url_for('getAuteurs') }}" class="btn btn-secondary">Retour</a>
 </form >
 {% endblock %}
