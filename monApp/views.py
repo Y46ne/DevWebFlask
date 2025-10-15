@@ -51,6 +51,7 @@ def getLivres():
     return render_template('livre_list.html', title = "R3.01 Dev Web avec Flask", livres = lesLivres)
 
 @app.route('/livres/<idL>/update')
+@login_required
 def updateLivre(idL):
     unLivre = Livre.query.get(idL)
     unForm = FormLivre(idL = unLivre.idL, Prix = unLivre.Prix)
@@ -118,6 +119,7 @@ def createAuteur():
     return render_template("auteur_create.html", createForm=unForm)
 
 @app.route ('/auteur/insert/', methods =("POST" ,))
+@login_required
 def insertAuteur():
     insertedAuteur = None
     unForm = FormAuteur()
@@ -131,6 +133,7 @@ def insertAuteur():
 
 
 @app.route('/auteurs/<idA>/delete/')
+@login_required
 def deleteAuteur(idA):
     unAuteur = Auteur.query.get(idA)
     unForm = FormAuteur(idA=unAuteur.idA, Nom=unAuteur.Nom)
@@ -138,6 +141,7 @@ def deleteAuteur(idA):
 
 
 @app.route ('/auteur/erase/', methods =("POST" ,))
+@login_required
 def eraseAuteur():
     deletedAuteur = None
     unForm = FormAuteur()

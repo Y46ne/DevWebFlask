@@ -37,6 +37,7 @@ class User(db.Model, UserMixin):
     Login = db.Column( db.String(100), primary_key=True )
     Password = db.Column( db.String(100) )
 
+
     def get_id(self):
         return self.Login
 

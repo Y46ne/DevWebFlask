@@ -53,3 +53,11 @@ TP6:
 * ajout de la page pour se login
 
 * ajout des restrictions faisant que le login est obligatoire pour accèder à certaine page
+
+TP7 : 
+
+* Faire les différents tests unitaire
+
+* Test les redirections
+
+* A faire : tester les méthodes POST pour insert et erase, et refaire le tout pour livre
