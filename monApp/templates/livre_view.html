@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block main %}
+<h1 >Consultation du livre "{{ selectedLivre.Titre }}"</h1>
+<form role="form" method="POST" action="">
+    {{ viewForm.hidden_tag () }}
+    <div class="form-group mb-3">
+        <label>Titre</label>
+        <input class="form-control" disabled size="50" type="text" value="{{ selectedLivre.Titre }}">
+    </div>
+    <div class="form-group mb-3">
+        {{ viewForm.Prix.label }} 
+        {{ viewForm.Prix(size=50, disabled=True, class_="form-control") }}
+    </div>
+    <div class="form-group mb-3">
+        <label>Auteur</label>
+        <p class="form-control-static"><a href="{{ url_for('viewAuteur', idA=selectedLivre.auteur.idA) }}">{{ selectedLivre.auteur.Nom }}</a></p>
+    </div>
+    <a href="{{ url_for('getLivres') }}" class="btn btn-secondary">Retour</a>
+</form >
+{% endblock %}
