@@ -5,7 +5,7 @@ from .app import login_manager
 
 class Auteur(db.Model):
     idA = db.Column( db.Integer, primary_key=True )
-    Nom = db.Column( db.String(100) )
+    Nom = db.Column(db.String(100), unique=True)
     
     def __init__(self, Nom): 
         self.Nom = Nom

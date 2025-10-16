@@ -18,14 +18,16 @@
             <tr>
                 <th>Titre</th>
                 <th>Prix</th>
+                <th>Lien</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for livre in selectedAuteur.livres %}
             <tr>
-                <td>{{ livre.Titre }}</td>
-                <td>{{ livre.Prix }} €</td>
+                <td>{{livre.Titre}}</td>
+                <td>{{livre.Prix}}</td>
+                <td><a href="{{livre.Url}}" target="_blank">{{livre.Url}}</a></td>
                 <td><a href="{{ url_for('viewLivre', idL=livre.idL) }}" class="btn btn-info">Voir</a></td>
             </tr>
         {% endfor %}

@@ -1,0 +1,5 @@
+[run]
+source = monApp
+omit = 
+    */test/*
+    monApp/__init__.py

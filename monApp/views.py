@@ -1,10 +1,11 @@
 from .app import app, db
 from config import *
 from flask import render_template, request
-from monApp.models import Auteur, Livre
+from monApp.models import Auteur, Livre, User
 from monApp.forms import *
 from flask import url_for, redirect
 from flask_login import *
+from hashlib import sha256
 
 
 @app.route('/')
@@ -67,7 +68,7 @@ def saveLivre():
     # If form is invalid, re-render the update page with the same form
     return render_template("livre_update.html", selectedLivre=updatedLivre, updateForm=unForm)
 
-@app.route('/livres/<int:idL>/view/') # Good practice to specify type
+@app.route('/livres/<idL>/view/') # Good practice to specify type
 def viewLivre(idL):
     unLivre = Livre.query.get_or_404(idL)
     unForm = FormLivre(obj=unLivre) # Pre-populate form
@@ -79,7 +80,7 @@ def viewLivre(idL):
 # ... (It can stay as it was)
 
 
-@app.route('/auteurs/<int:idA>/update')
+@app.route('/auteurs/<idA>/update')
 @login_required
 def updateAuteur(idA):
     unAuteur = Auteur.query.get_or_404(idA)
@@ -101,7 +102,7 @@ def saveAuteur():
 
     return render_template("auteur_update.html", selectedAuteur=updatedAuteur, updateForm=unForm)
 
-@app.route('/auteurs/<int:idA>/view/')
+@app.route('/auteurs/<idA>/view/')
 def viewAuteur(idA):
     unAuteur = Auteur.query.get_or_404(idA)
     unForm = FormAuteur(obj=unAuteur)
@@ -113,17 +114,21 @@ def createAuteur():
     unForm = FormAuteur()
     return render_template("auteur_create.html", createForm=unForm)
 
-@app.route ('/auteur/insert/', methods =("POST" ,))
+@app.route('/auteur/insert/', methods=("POST",))
 @login_required
 def insertAuteur():
     unForm = FormAuteur()
     if unForm.validate_on_submit(): 
+        existingAuteur = Auteur.query.filter_by(Nom=unForm.Nom.data).first()
+        if existingAuteur:
+            Warning("l'auteur existe déjà")
+            return render_template("auteur_create.html", createForm=unForm)
         insertedAuteur = Auteur(Nom=unForm.Nom.data)
         db.session.add(insertedAuteur)
         db.session.commit()
-        # More reliable way to get the new ID
         return redirect(url_for('viewAuteur', idA=insertedAuteur.idA))
     return render_template("auteur_create.html", createForm=unForm)
+
 
 
 @app.route('/auteurs/<int:idA>/delete/')
@@ -161,6 +166,19 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route("/signin/", methods=["GET", "POST"])
+def signin():
+    unForm = SignInForm()
+    if unForm.validate_on_submit():
+        m = sha256()
+        m.update(unForm.Password.data.encode())
+        passwd = m.hexdigest()
+        insertedUser = User(Login=unForm.Login.data,Password=passwd)
+        db.session.add(insertedUser)
+        db.session.commit()
+        return redirect(url_for("login"))
+    
+    return render_template("signin.html",form=unForm)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -61,3 +61,9 @@ TP7 :
 * Test les redirections
 
 * A faire : tester les méthodes POST pour insert et erase, et refaire le tout pour livre
+
+
+
+### Couverture des tests : 
+
+![alt text](./ImageCoverage.png)
